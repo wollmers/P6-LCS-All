@@ -1,5 +1,5 @@
 use v6;
-module LCS::All:ver<0.1.0>:auth<wollmers> {
+module LCS::All:ver<0.1.1>:auth<wollmers> {
 
   our sub allLCS($X, $Y) is export {
 
