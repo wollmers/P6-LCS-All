@@ -1,4 +1,5 @@
 {
+    "perl" : "6.*",
     "name": "LCS::All",
     "version": "0.1.0",
     "description": "Calculate all Longest Common Subsequences",
