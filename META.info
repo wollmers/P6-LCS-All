@@ -1,7 +1,7 @@
 {
     "perl" : "6.*",
     "name": "LCS::All",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "description": "Calculate all Longest Common Subsequences",
     "author": "Helmut Wollmersdorfer",
     "depends": [],

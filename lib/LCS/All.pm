@@ -1,5 +1,5 @@
 use v6;
-module LCS::All:ver<0.1.1>:auth<wollmers> {
+module LCS::All:ver<0.2.0>:auth<wollmers> {
 
   our sub allLCS($X, $Y) is export {
 
@@ -16,7 +16,7 @@ module LCS::All:ver<0.1.1>:auth<wollmers> {
       loop ($j = 1; $j <= $n; $j++) {
         if ($X[$i-1] eqv $Y[$j-1]) {
           $c[$i][$j] = $c[$i-1][$j-1]+1;
-          push @($ranks{$c[$i][$j]}), $[$i-1, $j-1];
+          push $ranks{$c[$i][$j]}, $[$i-1, $j-1];
         }
         else {
           $c[$i][$j] =
@@ -27,22 +27,22 @@ module LCS::All:ver<0.1.1>:auth<wollmers> {
       }
     }
     my $max = %($ranks).keys.elems;
-    return all_lcs($ranks, 1, $max);
+    return all_lcs($ranks, $max);
   }
 
-  my sub all_lcs($ranks, $rank, $max) {
-
+  my sub all_lcs($ranks, $max) {
     my $R = [[],];
+    my $rank = 1;
 
     while ($rank <= $max) {
       my @temp;
       for @($R) -> $path {
         for @($ranks{$rank}) -> $hunk {
           if ( @($path).elems == 0 ) {
-            push @temp, $[$hunk];
+            push @temp, [$hunk];
           }
-          elsif ( ($path[*-1][0] < $hunk[0]) & ($path[*-1][1] < $hunk[1]) ) {
-            push @temp, $[@($path), $hunk];
+          elsif ( ($path[*-1][0] < $hunk[0]) && ($path[*-1][1] < $hunk[1]) ) {
+            push @temp, [(@($path), $hunk).flat];
           }
         }
       }
